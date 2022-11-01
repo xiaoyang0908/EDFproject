@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.JobPros1Mapper">
+  <resultMap id="BaseResultMap" type="com.example.demo.taskInstance.JobPros1">
+    <id column="name" jdbcType="VARCHAR" property="name" />
+    <result column="duration" jdbcType="INTEGER" property="duration" />
+    <result column="period" jdbcType="INTEGER" property="period" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="priority" jdbcType="INTEGER" property="priority" />
+    <result column="deadline" jdbcType="INTEGER" property="deadline" />
+    <result column="separation" jdbcType="INTEGER" property="separation" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    name, duration, period, type, priority, deadline, separation
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from test
+    where name = #{name,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from test
+    where name = #{name,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.example.demo.taskInstance.JobPros1">
+    insert into test (name, duration, period, 
+      type, priority, deadline, 
+      separation)
+    values (#{name,jdbcType=VARCHAR}, #{duration,jdbcType=INTEGER}, #{period,jdbcType=INTEGER}, 
+      #{type,jdbcType=VARCHAR}, #{priority,jdbcType=INTEGER}, #{deadline,jdbcType=INTEGER}, 
+      #{separation,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.demo.taskInstance.JobPros1">
+    insert into test
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        name,
+      </if>
+      <if test="duration != null">
+        duration,
+      </if>
+      <if test="period != null">
+        period,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="priority != null">
+        priority,
+      </if>
+      <if test="deadline != null">
+        deadline,
+      </if>
+      <if test="separation != null">
+        separation,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="duration != null">
+        #{duration,jdbcType=INTEGER},
+      </if>
+      <if test="period != null">
+        #{period,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="priority != null">
+        #{priority,jdbcType=INTEGER},
+      </if>
+      <if test="deadline != null">
+        #{deadline,jdbcType=INTEGER},
+      </if>
+      <if test="separation != null">
+        #{separation,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.demo.taskInstance.JobPros1">
+    update test
+    <set>
+      <if test="duration != null">
+        duration = #{duration,jdbcType=INTEGER},
+      </if>
+      <if test="period != null">
+        period = #{period,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="priority != null">
+        priority = #{priority,jdbcType=INTEGER},
+      </if>
+      <if test="deadline != null">
+        deadline = #{deadline,jdbcType=INTEGER},
+      </if>
+      <if test="separation != null">
+        separation = #{separation,jdbcType=INTEGER},
+      </if>
+    </set>
+    where name = #{name,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.demo.taskInstance.JobPros1">
+    update test
+    set duration = #{duration,jdbcType=INTEGER},
+      period = #{period,jdbcType=INTEGER},
+      type = #{type,jdbcType=VARCHAR},
+      priority = #{priority,jdbcType=INTEGER},
+      deadline = #{deadline,jdbcType=INTEGER},
+      separation = #{separation,jdbcType=INTEGER}
+    where name = #{name,jdbcType=VARCHAR}
+  </update>
+
+  <!--获取所有task 并返回list-->
+  <select id="findAllTasks" resultType="com.example.demo.taskInstance.JobPros1">
+    select * from test
+  </select>
+</mapper>
